@@ -10,7 +10,9 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
   ],
 });
-
+client.on('ready', (c) => {
+  console.log(`bOT IS READY TO CHAT`)
+})
 //eventlistner using .on
 client.on("messageCreate", (message) => {
     if(message.author.bot) return;
@@ -20,7 +22,12 @@ client.on("messageCreate", (message) => {
 });
 
 client.on('interactionCreate', interaction => {
-    interaction.reply("Pong!!")
+   if(interaction.commandName === 'ping'){
+    interaction.reply("Pong!");
+   }
+   if(interaction.commandName === 'hey'){
+    interaction.reply("Hey! How you doing");
+   }
 })
 
 client.login(process.env.TOKEN);
