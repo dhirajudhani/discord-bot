@@ -1,4 +1,7 @@
-import { Client, GatewayIntentBits, messageLink } from "discord.js";
+import dotenv from 'dotenv'
+import { Client, GatewayIntentBits, messageLink, IntentsBitField  } from "discord.js";
+
+dotenv.config()
 
 const client = new Client({
   intents: [
@@ -8,6 +11,7 @@ const client = new Client({
   ],
 });
 
+//eventlistner using .on
 client.on("messageCreate", (message) => {
     if(message.author.bot) return;
   message.reply({
@@ -15,5 +19,8 @@ client.on("messageCreate", (message) => {
   })
 });
 
-client.login(
-);
+client.on('interactionCreate', interaction => {
+    interaction.reply("Pong!!")
+})
+
+client.login(process.env.TOKEN);
