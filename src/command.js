@@ -34,6 +34,10 @@ const commands = [
         required : true
       },
     ]
+  },
+  {
+    name: 'embed',
+    description: 'Sends an embed!'
   }
 ];
 
