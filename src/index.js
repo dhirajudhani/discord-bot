@@ -62,6 +62,26 @@ client.on("interactionCreate", (interaction) => {
 
     interaction.reply({embeds : [embed]})
   }
+
+  if(interaction.isButton()){
+
+    const role = interaction.guild.roles.cache.get(interaction.customId);
+    if(!role){
+      interaction.reply({
+        content: "I couldn't find that role",
+        ephemeral: true
+      })
+      return;
+    }
+    const hasRole = interaction.member.roles.cache.has(role.id);
+    if(hasRole){
+        interaction.member.roles.remove(role);
+        interaction.editReply(`The role ${role} has been removed`)
+        return
+    }
+    interaction.member.roles.add(role)
+    interaction.editReply(`The role ${role} has been added`)
+  }
 });
 
 client.login(process.env.TOKEN);
